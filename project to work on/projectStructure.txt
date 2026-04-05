@@ -1,0 +1,83 @@
+📅 Phase 0 – Next 10 Days (Exam-Friendly)
+
+Average load: 30–45 min per day max.
+
+Requirements & Sketches (Day 1-2)
+Write down user flows and screens in a notebook or FigJam/Draw.io.
+
+Pages: Login, Report Issue, Dashboard/Map, Admin.
+
+Roles: Citizen vs. Admin.
+
+Tech Familiarisation (Days 3-6)
+Light, no-pressure reading or short tutorials:
+
+React basics (components, hooks, routing) – watch 1–2 hr crash course.
+
+Quick overview of Firebase OR Node+Mongo (pick later).
+
+Database & API Design (Days 7-8)
+Draft a simple ER diagram / Firestore schema (you can copy the one I shared earlier).
+
+Project Setup (Days 9-10)
+If you have time create the GitHub repo, initialise a blank React app (npm create vite@latest)—just the skeleton so it’s ready after exams.
+
+✅ Outcome: By the time exams start you have architecture notes, schema diagram, and a starter repo, but your mental bandwidth stays on midsems.
+
+📅 Phase 1 – After Midsems (≈2–3 weeks)
+
+Now you can code in earnest.
+
+Week 1
+
+Build UI skeleton & routing.
+
+Firebase/Node backend setup.
+
+User authentication.
+
+Week 2
+
+Issue reporting with image + location.
+
+Dashboard list + map view.
+
+Week 3
+
+Role-based admin panel & status updates.
+
+Realtime updates & upvotes.
+
+Deliverable: Working MVP hosted on Vercel/Render.
+
+📅 Phase 2 – Enhancements (Optional, 4–6 more weeks)
+
+Push notifications/email alerts.
+
+Analytics dashboard & heatmaps.
+
+PWA or Flutter mobile client.
+
+AI image classification.
+
+CI/CD, Docker/Kubernetes if you want DevOps cred.
+
+How to Balance with Exams
+
+Treat Phase 0 tasks like revision breaks—short, creative sessions to relax.
+
+Don’t install heavy dependencies or start debugging until after exams.
+
+Use a single notes doc (Notion/Google Docs) to capture every idea so nothing slips.
+
+Quick “Prep Checklist” Before Exams
+
+ User flow diagram
+
+ Feature list with priorities (MVP vs. stretch)
+
+ Choice of stack (React + Firebase or React + Node/Mongo)
+
+ Database schema draft
+
+ Empty GitHub repo with README “Project starting after midsems”

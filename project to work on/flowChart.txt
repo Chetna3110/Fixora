@@ -1,0 +1,128 @@
+📅 Phase-wise Roadmap
+Phase 0 – Pre-midsems (10 days, light prep)
+
+Goal: Plan everything without stressing your exams.
+
+Sketch screens & user flow: Login, Report Issue, Dashboard/Map, Admin Panel.
+
+Roles: Citizen vs Admin (permissions, views).
+
+Stack decision:
+
+Frontend: React
+
+Backend: Firebase (easy) or Node + MongoDB (flexible)
+
+Database & API design: Draw ER diagram / Firestore schema.
+
+Starter repo setup: Blank React app on GitHub.
+
+✅ Outcome: Architecture notes, sketches, DB schema, starter repo.
+
+Phase 1 – Core MVP (2–3 weeks after midsems)
+Week 1 – Basic UI & Auth
+
+Build React pages: Login, Dashboard, Report Issue, Admin Panel skeleton.
+
+Routing using React Router.
+
+Authentication: Firebase Auth or JWT-based login for Node backend.
+
+Week 2 – Issue Reporting & Dashboard
+
+Citizen side: Report issue with title, description, location, image.
+
+Map integration: Google Maps / Leaflet.js showing reported issues.
+
+Dashboard: List view + map view.
+
+Upvotes/comments: Optional, for engagement.
+
+Week 3 – Admin & Real-time updates
+
+Admin can update issue status (pending, resolved).
+
+Real-time updates using Firebase Firestore or Socket.io.
+
+Filter & sort by priority, location, category.
+
+Phase 2 – Agentic AI & Enhancements (3–4 weeks)
+Step 1 – Agentic AI Features
+
+AI image classification: Detect issue type from uploaded image.
+
+Priority scoring: AI suggests urgency based on severity/location.
+
+Smart recommendations: Suggest which department/admin should handle it.
+
+Step 2 – Integration
+
+AI runs server-side (Node backend with TensorFlow/PyTorch) or client-side (TensorFlow.js).
+
+On submission → image sent to AI → predicted category + priority → saved in DB + shown to user/admin.
+
+Step 3 – Optional High-End Features
+
+Notifications: Push/email to citizens when issues are resolved.
+
+Analytics dashboard: Charts, heatmaps of issues.
+
+Gamification: Points, badges, leaderboards.
+
+Mobile-friendly / PWA support.
+
+Phase 3 – Testing & Deployment (1 week)
+
+Testing: Basic functional testing for users and admin.
+
+Deployment: Vercel (frontend) + Firebase or Render/Heroku (backend).
+
+Final touches: UI polish, error handling, minor bug fixes.
+
+🌐 Project Flowchart (Logic)
+[Start]
+   |
+   v
+[User Login/Register]
+   |
+   v
+[Role Check: Citizen/Admin]
+   |                     \
+   |                      \
+Citizen                   Admin
+   |                       |
+   v                       v
+[Report Issue]          [Dashboard View]
+   |                       |
+   v                       v
+[Upload Image + Details] [View & Filter Issues]
+   |                       |
+   v                       v
+[Agentic AI Processes Image]
+   | (classifies type, assigns priority)
+   v
+[Save Issue to DB + Show Prediction]
+   |
+   v
+[Real-Time Update on Map/Dashboard]
+   |
+   v
+[Citizen sees issue status updates]
+   |
+   v
+[Admin updates status/resolution]
+   |
+   v
+[Optional Notifications / Analytics / Gamification]
+   |
+   v
+[End]
+
+
+Key Notes:
+
+Agentic AI sits between submission and DB: acts as “intelligent agent”.
+
+Real-time updates keep citizens engaged.
+
+Gamification and analytics enhance uniqueness and hackathon points.

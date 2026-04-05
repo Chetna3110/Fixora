@@ -1,0 +1,94 @@
+Project: Crowdsourced Local Problem Tracker
+
+Goal: A platform where citizens/students can report local issues (potholes, garbage, broken streetlights, water issues, etc.) → authorities/volunteers can respond & track status.
+
+🔹 Features
+
+User Registration & Login
+
+Simple email/Google sign-in.
+
+Role-based login: Citizen / Admin (authority/volunteer).
+
+Problem Reporting
+
+Users post issues with:
+
+Title + Description
+
+Category (Road, Water, Electricity, Sanitation, etc.)
+
+Image upload (e.g., pothole photo)
+
+Location (via Google Maps API / GPS).
+
+Issue Dashboard
+
+Citizens can see issues reported in their area.
+
+Filter by category, severity, pending/resolved.
+
+Admin Panel
+
+Authorities/volunteers can mark issue as In Progress / Resolved.
+
+Analytics: Number of issues per category/area.
+
+Community Upvotes
+
+Other citizens can upvote issues → helps prioritize.
+
+Notifications
+
+Email/Push notification when issue status changes.
+
+🔹 Tech Stack
+
+Frontend: React / Next.js (web) OR Flutter (mobile app).
+
+Backend: Node.js (Express) OR Django/Flask (Python).
+
+Database: MongoDB / PostgreSQL.
+
+Maps & Location: Google Maps API / OpenStreetMap.
+
+Image Upload: Cloudinary / Firebase Storage.
+
+Deployment: Heroku / Vercel / Render.
+
+🔹 Implementation Roadmap
+
+Phase 1 (MVP)
+✅ User can post a problem with description + image.
+✅ Issues stored in DB and listed on dashboard.
+
+Phase 2
+🔄 Add location (map pin) + category filter.
+🔄 Admin panel to update status.
+
+Phase 3 (Resume Booster)
+🌐 Add upvotes system + analytics dashboard.
+📱 Deploy mobile version with Flutter.
+📊 Data visualization (number of potholes fixed this month, etc.).
+
+🔹 Example User Flow
+
+User opens app → “Report Issue”.
+
+Uploads photo of pothole, selects category = Road, adds location.
+
+Issue appears on map/dashboard.
+
+Others upvote same issue → priority rises.
+
+Authority updates status: Resolved.
+
+User gets notification: “Your issue has been fixed!”.
+
+🔹 Why it’s Resume-Worthy
+
+Shows real-world problem solving.
+
+Demonstrates full-stack development + API integration.
+
+Bonus: If you actually launch it for your college campus or local ward, it will stand out as impact project in interviews.
