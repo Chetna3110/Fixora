@@ -170,7 +170,7 @@ npm install
 
 Create `server/.env`:
 ```env
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/fixora
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/fixora
 JWT_SECRET=your_jwt_secret_key
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
