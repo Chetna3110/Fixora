@@ -1,11 +1,11 @@
-# 📍 Fixora — Civic Issue Tracking Platform
+# Fixora — Civic Issue Tracking Platform
 
 > **Your City. Your Voice. Your Fix.**  
 > A full-stack civic tech platform where citizens report local problems, workers resolve them, and communities collaborate through guilds.
 
 ---
 
-## 🌐 Live Demo
+## Live Demo
 
 > _Coming soon — deploy on Vercel + Render_
 
@@ -13,7 +13,7 @@
 
 
 
-## 🚀 Features
+##  Features
 
 ###  For Citizens (Users)
 -  Report civic issues with title, description, category, photo & location
@@ -39,7 +39,7 @@
 -  Analytics dashboard
 -  Guild leaderboard
 
-### 🌟 Platform Features
+### Platform Features
 -  Guild system — volunteer groups with chat, badges & leaderboard
 -  Live map with colored pins (red/orange/green by status)
 -  AI chatbot assistant (powered by OpenRouter)
@@ -48,7 +48,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 | Technology | Purpose |
@@ -206,7 +206,7 @@ http://localhost:5173
 
 ---
 
-## 🗺️ API Endpoints
+## API Endpoints
 
 ### Auth Routes `/api/auth`
 | Method | Endpoint | Description | Access |
