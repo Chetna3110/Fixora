@@ -236,7 +236,7 @@ export default function IssueModal({ issue, onClose, onUpvote }) {
                 ? (dark ? 'rgba(26,86,219,0.2)' : '#eff6ff')
                 : 'linear-gradient(135deg, #1a56db, #2563eb)',
               color: hasUpvoted ? '#1a56db' : 'white',
-              border: hasUpvoted ? '1.5px solid #bfdbfe' : 'none',
+             
               opacity: hasUpvoted ? 0.8 : 1,
               transition: 'all 0.2s'
             }}>
