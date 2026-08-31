@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider } from './ThemeContext';
+import { ThemeProvider } from './themeContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
