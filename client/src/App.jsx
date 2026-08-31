@@ -6,7 +6,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import ReportIssue from './pages/ReportIssue';
 import Admin from './pages/Admin';
-import ChatBot from './components/ChatBot';
+import ChatBot from './components/Chatbot';
 import CityBackground from './CityBackground';
 import Contact from './pages/Contact';
 import Guilds from './pages/Guilds';
