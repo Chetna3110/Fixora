@@ -1,4 +1,4 @@
-import { useTheme } from './ThemeContext';
+import { useTheme } from './themeContext';
 
 export default function CityBackground() {
   const { dark } = useTheme();
