@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Logo from '../Logo';
-import { useTheme } from '../ThemeContext';
+import { useTheme } from '../themeContext';
 
 export default function Home() {
   const navigate = useNavigate();
