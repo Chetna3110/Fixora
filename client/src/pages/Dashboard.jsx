@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '../ThemeContext';
+import { useTheme } from '../themeContext';
 import IssueModal from '../components/IssueModal';
 
 export default function Dashboard() {

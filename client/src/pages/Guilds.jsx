@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../Logo';
-import { useTheme } from '../ThemeContext';
+import { useTheme } from '../themeContext';
 
 
 const ICONS = ['🏰', '🛡️', '⚔️', '🌊', '🔥', '🌿', '⚡', '🏗️', '🚦', '🌍'];

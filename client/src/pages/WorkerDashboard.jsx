@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '../ThemeContext';
+import { useTheme } from '../themeContext';
 
 export default function WorkerDashboard() {
   const [issues, setIssues] = useState([]);

@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import Logo from '../Logo';
-import { useTheme } from '../ThemeContext';
+
 
 
 // Fix default marker icon bug in Leaflet
