@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useTheme } from '../ThemeContext';
+import { useTheme } from '../themeContext';
 import Logo from '../Logo';
 
 export default function Layout({ children }) {
