@@ -21,8 +21,7 @@ export default function Register() {
     }
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/auth/register', form);
-      setMessage('Account created! Redirecting to login...');
+await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);      setMessage('Account created! Redirecting to login...');
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
       setMessage(err.response?.data?.message || 'Error occurred');
@@ -30,20 +29,11 @@ export default function Register() {
     setLoading(false);
   };
 
-  const roles = [
-    {
-      key: 'user',
-      label: 'Citizen',
-    },
-    {
-      key: 'worker',
-      label: 'Worker',
-    },
-    {
-      key: 'admin',
-      label: 'Admin',
-    },
-  ];
+ const roles = [
+  { key: 'user', label: 'Citizen', icon: '👤', desc: 'Report & track issues' },
+  { key: 'worker', label: 'Worker', icon: '🔧', desc: 'Get assigned issues' },
+  { key: 'admin', label: 'Admin', icon: '👑', desc: 'Manage everything' },
+];
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', background: 'transparent' }}>
