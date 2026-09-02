@@ -16,6 +16,7 @@
 
   --primary:     #c9a96e;
   --primary-dark:#a8833a;
+  --text: #1a1208; --text-muted: #6b5c3e; --text-faint: #a08c6e; --card: #ffffff; --card-border: rgba(201,169,110,0.25); --input-bg: #fdfaf5; --input-border: rgba(201,169,110,0.3); --bg: #f5f0e8; --shadow-lg: 0 8px 30px rgba(0,0,0,0.1);
 }
 
 /* ── LIGHT THEME ── */
