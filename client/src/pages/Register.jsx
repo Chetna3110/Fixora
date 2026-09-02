@@ -21,7 +21,8 @@ export default function Register() {
     }
     setLoading(true);
     try {
-await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);      setMessage('Account created! Redirecting to login...');
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);
+      setMessage('Account created! Redirecting to login...');
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
       setMessage(err.response?.data?.message || 'Error occurred');
@@ -29,11 +30,22 @@ await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);      se
     setLoading(false);
   };
 
- const roles = [
-  { key: 'user', label: 'Citizen', icon: '👤', desc: 'Report & track issues' },
-  { key: 'worker', label: 'Worker', icon: '🔧', desc: 'Get assigned issues' },
-  { key: 'admin', label: 'Admin', icon: '👑', desc: 'Manage everything' },
-];
+  const roles = [
+    { key: 'user', label: 'Citizen', icon: '👤', desc: 'Report & track issues' },
+    { key: 'worker', label: 'Worker', icon: '🔧', desc: 'Get assigned issues' },
+    { key: 'admin', label: 'Admin', icon: '👑', desc: 'Manage everything' },
+  ];
+
+  const labelStyle = {
+    display: 'block',
+    marginBottom: '6px',
+    color: '#374151',
+    fontWeight: 600,
+    fontSize: '0.78rem',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    fontFamily: 'Outfit, sans-serif'
+  };
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', background: 'transparent' }}>
@@ -60,7 +72,7 @@ await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);      se
 
         {/* Name */}
         <div className="form-group">
-          <label>Full Name</label>
+          <label style={labelStyle}>Full Name</label>
           <input className="form-input" placeholder="John Doe"
             value={form.name}
             onKeyDown={e => e.key === 'Enter' && handleSubmit()}
@@ -69,7 +81,7 @@ await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);      se
 
         {/* Email */}
         <div className="form-group">
-          <label>Email Address</label>
+          <label style={labelStyle}>Email Address</label>
           <input className="form-input" type="email" placeholder="you@example.com"
             value={form.email}
             onKeyDown={e => e.key === 'Enter' && handleSubmit()}
@@ -78,7 +90,7 @@ await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);      se
 
         {/* Password */}
         <div className="form-group">
-          <label>Password</label>
+          <label style={labelStyle}>Password</label>
           <input className="form-input" type="password" placeholder="Min. 6 characters"
             value={form.password}
             onKeyDown={e => e.key === 'Enter' && handleSubmit()}
@@ -87,7 +99,7 @@ await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);      se
 
         {/* Role Selector */}
         <div className="form-group">
-          <label>I am a</label>
+          <label style={labelStyle}>I am a</label>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginTop: '6px' }}>
             {roles.map(r => (
               <button key={r.key} onClick={() => setForm({ ...form, role: r.key })}
