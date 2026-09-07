@@ -21,7 +21,7 @@ export default function Home() {
   };
 
   const steps = [
-    { num: '1', icon: '📍', title: 'Spot', desc: 'Notice a pothole, broken light, or garbage pile-up in your neighborhood.' },
+    { num: '1', icon: '🗺️', title: 'Spot', desc: 'Notice a pothole, broken light, or garbage pile-up in your neighborhood.' },
     { num: '2', icon: '📸', title: 'Snap', desc: 'Take a photo, pin the exact location, and submit it in under a minute.' },
     { num: '3', icon: '✅', title: 'Solve', desc: 'Track progress in real time as authorities acknowledge and resolve it.' },
   ];
