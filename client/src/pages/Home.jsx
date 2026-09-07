@@ -20,6 +20,18 @@ export default function Home() {
     setDropdownOpen(false);
   };
 
+  const steps = [
+    { num: '1', icon: '📍', title: 'Spot', desc: 'Notice a pothole, broken light, or garbage pile-up in your neighborhood.' },
+    { num: '2', icon: '📸', title: 'Snap', desc: 'Take a photo, pin the exact location, and submit it in under a minute.' },
+    { num: '3', icon: '✅', title: 'Solve', desc: 'Track progress in real time as authorities acknowledge and resolve it.' },
+  ];
+
+  const testimonials = [
+    { quote: 'I reported a broken streetlight near my house and it was fixed within a week. First time I actually saw a civic complaint go somewhere.', name: 'Ananya Sharma', role: 'Resident, Sector 12' },
+    { quote: 'The live map view is genuinely useful — I can see what\'s already been reported before filing a duplicate. Simple and effective.', name: 'Rohit Verma', role: 'Local Shop Owner' },
+    { quote: 'As a ward volunteer, the guild system helps us coordinate cleanup drives way better than our old WhatsApp group ever did.', name: 'Priya Menon', role: 'Community Volunteer' },
+  ];
+
   return (
     <div>
       {/* Navbar */}
@@ -29,7 +41,6 @@ export default function Home() {
           Fixora
         </div>
         <div className="navbar-links">
-          {/* 🌙 Theme Toggle */}
           <button onClick={toggleTheme} style={{
             background: dark ? 'rgba(255,255,255,0.1)' : '#f3f4f6',
             border: dark ? '1px solid rgba(255,255,255,0.15)' : '1px solid #e5e7eb',
@@ -64,7 +75,7 @@ export default function Home() {
                       <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text)' }}>{user.name}</div>
                       <div style={{ color: 'var(--text-muted)', fontSize: '0.82rem' }}>{user.email}</div>
                       <div style={{ marginTop: '4px' }}>
-                        <span className="badge" style={{ background: '#eff6ff', color: '#1a56db', fontSize: '0.75rem' }}>
+                        <span className="badge" style={{ background: 'var(--tag-bg)', color: 'var(--tag-color)', fontSize: '0.75rem' }}>
                           {user.role}
                         </span>
                       </div>
@@ -123,6 +134,26 @@ export default function Home() {
         ))}
       </div>
 
+      {/* How It Works */}
+      <div className="how-it-works">
+        <div className="section-label">EFFECTIVE CIVIC SOLUTION</div>
+        <h2>3-Step Issue Resolution</h2>
+        <p className="features-subtitle">Reporting a problem has never been this simple</p>
+        <div className="steps-row">
+          {steps.map((s, i) => (
+            <div className="step-item" key={s.title}>
+              <div className="step-circle">
+                <span className="step-icon">{s.icon}</span>
+                <span className="step-num">{s.num}</span>
+              </div>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+              {i < steps.length - 1 && <div className="step-connector" />}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Features */}
       <div className="features">
         <div className="section-label">HOW IT WORKS</div>
@@ -146,10 +177,31 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Testimonials */}
+      <div className="testimonials">
+        <div className="section-label">WHAT CITIZENS SAY</div>
+        <h2>Real People. Real Fixes.</h2>
+        <p className="features-subtitle">Stories from citizens using Fixora in their communities</p>
+        <div className="testimonials-grid">
+          {testimonials.map(t => (
+            <div className="testimonial-card" key={t.name}>
+              <div className="testimonial-quote-mark">“</div>
+              <p className="testimonial-text">{t.quote}</p>
+              <div className="testimonial-footer">
+                <div className="testimonial-avatar">{t.name.charAt(0)}</div>
+                <div>
+                  <div className="testimonial-name">{t.name}</div>
+                  <div className="testimonial-role">{t.role}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <footer className="footer">
         © 2026 <span>Fixora</span>. Built for citizens, by citizens. All rights reserved.
          <br></br><button className="nav-link" onClick={() => navigate('/contact')}>Contact us</button>
-
       </footer>
     </div>
   );

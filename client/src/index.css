@@ -17,7 +17,6 @@
   --primary:     #b08968;
   --primary-dark:#8a6642;
 
-  /* Fallback defaults so pages not wrapped in a theme still render correctly */
   --text: #3d342a;
   --text-muted: #8a7d6c;
   --text-faint: #b3a696;
@@ -118,7 +117,6 @@ body {
   min-height: 100vh;
 }
 
-/* ── FLOATING ORB BACKGROUND ── */
 body::before,
 body::after {
   content: '';
@@ -283,17 +281,18 @@ body::after {
 .btn-ghost:hover { background: var(--nav-link-hover-bg); }
 .btn-lg { padding: 13px 30px; font-size: 0.95rem; border-radius: 9px; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-.btn-white { background: white; color: #3d342a; font-weight: 600; }
-.btn-white:hover { background: #faf6f0; transform: translateY(-1px); }
-.btn-white-outline {
-  background: transparent; color: white;
-  border: 1.5px solid rgba(255,255,255,0.5); font-weight: 500;
-}
-.btn-white-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
 
-/* ── HERO ── */
+.btn-white { background: var(--gold); color: #fdfbf7; font-weight: 600; }
+.btn-white:hover { background: var(--gold-dark); transform: translateY(-1px); }
+.btn-white-outline {
+  background: transparent; color: var(--gold-dark);
+  border: 1.5px solid var(--gold); font-weight: 500;
+}
+.btn-white-outline:hover { background: rgba(176,137,104,0.08); border-color: var(--gold-dark); }
+
+/* ── HERO (light cream, matches navbar) ── */
 .hero {
-  background: linear-gradient(135deg, #2b2620 0%, #3d362c 50%, #2b2620 100%);
+  background: linear-gradient(135deg, #faf6f0 0%, #f3e9da 50%, #faf6f0 100%);
   min-height: 500px;
   display: flex; align-items: center;
   padding: 80px 48px;
@@ -304,37 +303,37 @@ body::after {
   content: '';
   position: absolute; top: -80px; right: -80px;
   width: 450px; height: 450px;
-  background: rgba(176,137,104,0.06);
+  background: rgba(176,137,104,0.14);
   border-radius: 50%;
 }
 .hero::after {
   content: '';
   position: absolute; bottom: -60px; left: 10%;
   width: 300px; height: 300px;
-  background: rgba(176,137,104,0.04);
+  background: rgba(176,137,104,0.1);
   border-radius: 50%;
 }
 .hero-content { max-width: 600px; position: relative; z-index: 1; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(176,137,104,0.12);
-  border: 1px solid rgba(176,137,104,0.3);
-  color: var(--gold-lt); padding: 5px 16px; border-radius: 50px;
-  font-size: 0.78rem; font-weight: 400;
+  background: rgba(176,137,104,0.14);
+  border: 1px solid rgba(176,137,104,0.35);
+  color: var(--gold-dark); padding: 5px 16px; border-radius: 50px;
+  font-size: 0.78rem; font-weight: 500;
   letter-spacing: 0.15em; text-transform: uppercase;
   margin-bottom: 20px;
 }
 .hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem; font-weight: 300;
-  color: #fdfbf7; line-height: 1.1;
+  font-size: 3.5rem; font-weight: 400;
+  color: #3d342a; line-height: 1.1;
   margin-bottom: 16px;
 }
-.hero h1 em { font-style: italic; color: var(--gold-lt); }
+.hero h1 em { font-style: italic; color: var(--gold-dark); }
 .hero p {
-  font-size: 0.95rem; color: rgba(253,251,247,0.6);
+  font-size: 0.95rem; color: rgba(61,52,42,0.65);
   line-height: 1.8; margin-bottom: 32px; max-width: 480px;
-  font-weight: 300;
+  font-weight: 400;
 }
 .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
 
@@ -350,9 +349,53 @@ body::after {
 .stat-item:last-child { border-right: none; }
 .stat-item h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem; font-weight: 600; color: var(--gold);
+  font-size: 2.2rem; font-weight: 600; color: var(--gold-dark);
 }
 .stat-item p { color: var(--text-muted); font-size: 0.8rem; margin-top: 3px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── HOW IT WORKS (3-step) ── */
+.how-it-works { padding: 80px 48px; text-align: center; background: transparent; }
+.steps-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; max-width: 900px; margin: 44px auto 0;
+}
+.step-item { position: relative; padding: 0 12px; }
+.step-circle {
+  width: 76px; height: 76px; margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  box-shadow: var(--shadow-card);
+}
+.step-icon { font-size: 1.7rem; }
+.step-num {
+  position: absolute; top: -6px; right: -6px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--gold); color: #fdfbf7;
+  font-size: 0.72rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+}
+.step-item h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 600;
+  color: var(--text); margin-bottom: 8px;
+}
+.step-item p {
+  color: var(--text-muted); font-size: 0.88rem;
+  line-height: 1.6; font-weight: 300;
+}
+@media (min-width: 700px) {
+  .step-item:not(:last-child)::after {
+    content: '';
+    position: absolute; top: 38px; left: calc(50% + 60px);
+    width: calc(100% - 60px); height: 1px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 12px);
+    opacity: 0.5;
+  }
+}
 
 /* ── FEATURES ── */
 .features { padding: 80px 48px; text-align: center; background: transparent; }
@@ -366,7 +409,7 @@ body::after {
   border: 1px solid var(--section-label-border);
   transition: background 0.4s;
 }
-.features h2 {
+.features h2, .how-it-works h2, .testimonials h2 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2.5rem; font-weight: 300;
   color: var(--text); margin-bottom: 10px;
@@ -400,6 +443,42 @@ body::after {
   margin-bottom: 8px; font-size: 1.15rem;
 }
 .feature-card p { color: var(--text-muted); line-height: 1.7; font-size: 0.88rem; font-weight: 300; }
+
+/* ── TESTIMONIALS ── */
+.testimonials { padding: 80px 48px; text-align: center; background: var(--stats-bg); }
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; max-width: 1050px; margin: 44px auto 0;
+}
+.testimonial-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px; padding: 28px 24px;
+  text-align: left; box-shadow: var(--shadow-card);
+  position: relative;
+}
+.testimonial-quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem; color: var(--gold);
+  opacity: 0.4; line-height: 1; margin-bottom: 4px;
+}
+.testimonial-text {
+  color: var(--text-muted); font-size: 0.9rem;
+  line-height: 1.7; margin-bottom: 20px; font-weight: 300;
+}
+.testimonial-footer { display: flex; align-items: center; gap: 12px; }
+.testimonial-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fdfbf7; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+}
+.testimonial-name { font-weight: 700; font-size: 0.88rem; color: var(--text); }
+.testimonial-role { font-size: 0.78rem; color: var(--text-faint); }
+
+@media (max-width: 900px) {
+  .steps-row, .testimonials-grid, .features-grid { grid-template-columns: 1fr; }
+}
 
 /* ── PAGE LAYOUT ── */
 .page-container { max-width: 1050px; margin: 0 auto; padding: 32px 24px; position: relative; z-index: 1; }
