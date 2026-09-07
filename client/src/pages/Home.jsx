@@ -117,6 +117,32 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        {/* Visual mockup card to fill empty space */}
+        <div className="hero-visual">
+          <div className="mock-card mock-card-back"></div>
+          <div className="mock-card mock-card-front">
+            <div className="mock-card-topbar">
+              <span className="mock-dot" style={{ background: '#f87171' }}></span>
+              <span className="mock-dot" style={{ background: '#fbbf24' }}></span>
+              <span className="mock-dot" style={{ background: '#34d399' }}></span>
+            </div>
+            <div className="mock-card-img">🛣️</div>
+            <div className="mock-card-body">
+              <div className="mock-badge">In Progress</div>
+              <h4>Pothole on MG Road</h4>
+              <p>📍 Sector 12, Main Street</p>
+              <div className="mock-card-footer">
+                <span>👍 47 upvotes</span>
+                <span className="mock-avatar">R</span>
+              </div>
+            </div>
+          </div>
+          <div className="mock-floating-stat">
+            <div className="mock-floating-num">98%</div>
+            <div className="mock-floating-label">Resolved</div>
+          </div>
+        </div>
       </div>
 
       {/* Stats */}
@@ -140,7 +166,7 @@ export default function Home() {
         <h2>3-Step Issue Resolution</h2>
         <p className="features-subtitle">Reporting a problem has never been this simple</p>
         <div className="steps-row">
-          {steps.map((s, i) => (
+          {steps.map((s) => (
             <div className="step-item" key={s.title}>
               <div className="step-circle">
                 <span className="step-icon">{s.icon}</span>
@@ -148,7 +174,6 @@ export default function Home() {
               </div>
               <h3>{s.title}</h3>
               <p>{s.desc}</p>
-              {i < steps.length - 1 && <div className="step-connector" />}
             </div>
           ))}
         </div>
@@ -185,7 +210,7 @@ export default function Home() {
         <div className="testimonials-grid">
           {testimonials.map(t => (
             <div className="testimonial-card" key={t.name}>
-              <div className="testimonial-quote-mark">“</div>
+              <div className="testimonial-quote-mark">"</div>
               <p className="testimonial-text">{t.quote}</p>
               <div className="testimonial-footer">
                 <div className="testimonial-avatar">{t.name.charAt(0)}</div>

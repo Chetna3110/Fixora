@@ -658,3 +658,97 @@ body::after {
 
 /* ── SELECTION ── */
 ::selection { background: rgba(47,158,99,0.15); color: var(--gold-dark); }
+
+/* ── HERO VISUAL MOCKUP ── */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.hero-visual {
+  position: relative;
+  width: 340px;
+  height: 380px;
+  flex-shrink: 0;
+  display: none;
+}
+@media (min-width: 1024px) {
+  .hero-visual { display: block; }
+}
+.mock-card {
+  position: absolute;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(15,26,20,0.12);
+}
+.mock-card-back {
+  width: 280px; height: 340px;
+  top: 30px; right: 0;
+  background: var(--section-label-bg);
+  transform: rotate(6deg);
+}
+.mock-card-front {
+  width: 300px; height: 360px;
+  top: 0; left: 0;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+.mock-card-topbar {
+  display: flex; gap: 6px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--card-border);
+}
+.mock-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.mock-card-img {
+  height: 140px;
+  background: linear-gradient(135deg, var(--gold-lt), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+}
+.mock-card-body { padding: 18px 20px; }
+.mock-badge {
+  display: inline-block;
+  background: #fffbeb; color: #d97706;
+  border: 1px solid #fde68a;
+  font-size: 0.68rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 50px;
+  margin-bottom: 10px; text-transform: uppercase;
+}
+.mock-card-body h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--text); margin-bottom: 6px;
+}
+.mock-card-body p {
+  font-size: 0.82rem; color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.mock-card-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.8rem; color: var(--text-muted);
+  border-top: 1px solid var(--card-border);
+  padding-top: 14px;
+}
+.mock-avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 700;
+}
+.mock-floating-stat {
+  position: absolute; bottom: -10px; left: -20px;
+  background: #ffffff; border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(15,26,20,0.15);
+  padding: 14px 20px; text-align: center;
+  border: 1px solid var(--card-border);
+}
+.mock-floating-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.4rem; font-weight: 800; color: var(--gold-dark);
+}
+.mock-floating-label {
+  font-size: 0.68rem; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
