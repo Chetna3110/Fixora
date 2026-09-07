@@ -121,7 +121,7 @@ export default function Home() {
         {/* Visual mockup card to fill empty space */}
        <div className="hero-visual">
   <video 
-    src="Firefly Create a 5-second seamless looping animation in a modern flat vector illustration style.__Sc.mp4" 
+    src="hero-video.mp4" 
     autoPlay 
     loop 
     muted 
