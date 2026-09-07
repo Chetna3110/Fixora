@@ -26,13 +26,14 @@ export default function Layout({ children }) {
 
   const isActive = (path) => location.pathname === path;
 
-  const gold = '#c9a96e';
-  const goldDim = 'rgba(201,169,110,0.2)';
-  const goldBorder = 'rgba(201,169,110,0.18)';
-  const cardBg = dark ? 'rgba(13,13,15,0.97)' : 'rgba(255,250,240,0.97)';
-  const border = dark ? 'rgba(201,169,110,0.15)' : 'rgba(201,169,110,0.25)';
-  const textColor = dark ? 'rgba(255,255,255,0.88)' : '#1a1208';
-  const mutedColor = dark ? 'rgba(255,255,255,0.38)' : 'rgba(26,18,8,0.45)';
+  const green = '#2f9e63';
+  const greenDark = '#1f7a4d';
+  const greenDim = 'rgba(47,158,99,0.15)';
+  const greenBorder = 'rgba(47,158,99,0.18)';
+  const cardBg = dark ? 'rgba(14,21,18,0.97)' : 'rgba(255,255,255,0.97)';
+  const border = dark ? 'rgba(47,158,99,0.2)' : 'rgba(47,158,99,0.15)';
+  const textColor = dark ? 'rgba(233,243,238,0.9)' : '#172420';
+  const mutedColor = dark ? 'rgba(233,243,238,0.4)' : 'rgba(23,36,32,0.45)';
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -40,7 +41,7 @@ export default function Layout({ children }) {
       {/* ── TOP NAVBAR ── */}
       <nav style={{
         position: 'sticky', top: 0, zIndex: 1000,
-        background: dark ? 'rgba(13,13,15,0.97)' : 'rgba(255,250,240,0.97)',
+        background: dark ? 'rgba(14,21,18,0.97)' : 'rgba(255,255,255,0.97)',
         borderBottom: `1px solid ${border}`,
         height: '62px',
         display: 'flex', alignItems: 'center',
@@ -48,8 +49,8 @@ export default function Layout({ children }) {
         padding: '0 24px',
         backdropFilter: 'blur(20px)',
         boxShadow: dark
-          ? '0 1px 24px rgba(201,169,110,0.06)'
-          : '0 1px 12px rgba(201,169,110,0.1)',
+          ? '0 1px 24px rgba(47,158,99,0.06)'
+          : '0 1px 12px rgba(47,158,99,0.06)',
         transition: 'background 0.4s, border-color 0.4s'
       }}>
 
@@ -58,7 +59,7 @@ export default function Layout({ children }) {
           <button
             onClick={() => setSidebarOpen(true)}
             style={{
-              background: dark ? 'rgba(201,169,110,0.08)' : 'rgba(201,169,110,0.1)',
+              background: dark ? 'rgba(47,158,99,0.1)' : 'rgba(47,158,99,0.08)',
               border: `1px solid ${border}`,
               borderRadius: '8px',
               width: '38px', height: '38px',
@@ -70,7 +71,7 @@ export default function Layout({ children }) {
             {[0, 1, 2].map(i => (
               <div key={i} style={{
                 width: '18px', height: '1.5px',
-                background: gold, borderRadius: '2px'
+                background: green, borderRadius: '2px'
               }} />
             ))}
           </button>
@@ -80,10 +81,9 @@ export default function Layout({ children }) {
             style={{
               display: 'flex', alignItems: 'center', gap: '10px',
               cursor: 'pointer',
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: '1.4rem', fontWeight: 600,
-              color: gold, letterSpacing: '0.08em',
-              textTransform: 'uppercase'
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+              fontSize: '1.3rem', fontWeight: 800,
+              color: greenDark, letterSpacing: '0.01em'
             }}>
             <Logo size={28} />
             Fixora
@@ -93,37 +93,37 @@ export default function Layout({ children }) {
         {/* Right — theme toggle + profile */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <button onClick={toggleTheme} style={{
-            background: dark ? 'rgba(201,169,110,0.08)' : 'rgba(201,169,110,0.1)',
+            background: dark ? 'rgba(47,158,99,0.1)' : 'rgba(47,158,99,0.08)',
             border: `1px solid ${border}`,
             borderRadius: '50px', padding: '6px 14px',
             cursor: 'pointer', fontSize: '0.78rem',
-            color: gold, fontFamily: 'DM Sans, sans-serif',
+            color: greenDark, fontFamily: 'DM Sans, sans-serif',
             display: 'flex', alignItems: 'center', gap: '6px',
-            letterSpacing: '0.05em', transition: 'all 0.3s'
+            letterSpacing: '0.02em', transition: 'all 0.3s'
           }}>
             {dark ? '☀️ Light' : '🌙 Dark'}
           </button>
 
           <div style={{
             display: 'flex', alignItems: 'center', gap: '8px',
-            background: dark ? 'rgba(201,169,110,0.08)' : 'rgba(201,169,110,0.1)',
+            background: dark ? 'rgba(47,158,99,0.1)' : 'rgba(47,158,99,0.08)',
             border: `1px solid ${border}`,
             borderRadius: '50px', padding: '4px 14px 4px 4px',
             transition: 'all 0.3s'
           }}>
             <div style={{
               width: '30px', height: '30px',
-              background: `linear-gradient(135deg, ${gold}, #a8833a)`,
+              background: `linear-gradient(135deg, ${green}, ${greenDark})`,
               borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#0d0d0f', fontWeight: 700, fontSize: '0.82rem'
+              color: '#fff', fontWeight: 700, fontSize: '0.82rem'
             }}>
               {user?.name?.charAt(0).toUpperCase()}
             </div>
             <span style={{
-              fontWeight: 500, fontSize: '0.85rem',
-              color: gold, fontFamily: 'DM Sans, sans-serif',
-              letterSpacing: '0.03em'
+              fontWeight: 600, fontSize: '0.85rem',
+              color: greenDark, fontFamily: 'DM Sans, sans-serif',
+              letterSpacing: '0.01em'
             }}>
               {user?.name?.split(' ')[0]}
             </span>
@@ -137,7 +137,7 @@ export default function Layout({ children }) {
           onClick={() => setSidebarOpen(false)}
           style={{
             position: 'fixed', inset: 0, zIndex: 1999,
-            background: 'rgba(0,0,0,0.6)',
+            background: 'rgba(0,0,0,0.5)',
             backdropFilter: 'blur(4px)',
             animation: 'fadeIn 0.2s ease'
           }}
@@ -148,10 +148,10 @@ export default function Layout({ children }) {
       <div style={{
         position: 'fixed', top: 0, left: 0,
         height: '100vh', width: '270px',
-        background: dark ? 'rgba(13,13,15,0.99)' : 'rgba(255,250,240,0.99)',
+        background: dark ? 'rgba(14,21,18,0.99)' : 'rgba(255,255,255,0.99)',
         borderRight: `1px solid ${border}`,
         zIndex: 2000,
-        boxShadow: '4px 0 40px rgba(0,0,0,0.3)',
+        boxShadow: '4px 0 40px rgba(0,0,0,0.15)',
         transform: sidebarOpen ? 'translateX(0)' : 'translateX(-100%)',
         transition: 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
         display: 'flex', flexDirection: 'column',
@@ -168,10 +168,9 @@ export default function Layout({ children }) {
           {/* Logo + name */}
           <div style={{
             display: 'flex', alignItems: 'center', gap: '10px',
-            fontFamily: 'Cormorant Garamond, serif',
-            fontSize: '1.25rem', fontWeight: 600,
-            color: gold, letterSpacing: '0.08em',
-            textTransform: 'uppercase'
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            fontSize: '1.15rem', fontWeight: 800,
+            color: greenDark, letterSpacing: '0.01em'
           }}>
             <Logo size={28} />
             Fixora
@@ -181,7 +180,7 @@ export default function Layout({ children }) {
           <button
             onClick={() => setSidebarOpen(false)}
             style={{
-              background: dark ? 'rgba(201,169,110,0.08)' : 'rgba(201,169,110,0.1)',
+              background: dark ? 'rgba(47,158,99,0.1)' : 'rgba(47,158,99,0.08)',
               border: `1px solid ${border}`,
               borderRadius: '8px', width: '32px', height: '32px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -192,17 +191,17 @@ export default function Layout({ children }) {
         {/* User Card */}
         <div style={{
           margin: '16px', padding: '16px',
-          background: dark ? 'rgba(201,169,110,0.06)' : 'rgba(201,169,110,0.08)',
+          background: dark ? 'rgba(47,158,99,0.08)' : 'rgba(47,158,99,0.06)',
           border: `1px solid ${border}`,
           borderRadius: '12px'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{
               width: '42px', height: '42px',
-              background: `linear-gradient(135deg, ${gold}, #a8833a)`,
+              background: `linear-gradient(135deg, ${green}, ${greenDark})`,
               borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#0d0d0f', fontWeight: 700, fontSize: '1rem'
+              color: '#fff', fontWeight: 700, fontSize: '1rem'
             }}>
               {user?.name?.charAt(0).toUpperCase()}
             </div>
@@ -214,11 +213,11 @@ export default function Layout({ children }) {
               <div style={{ color: mutedColor, fontSize: '0.78rem' }}>{user?.email}</div>
               <span style={{
                 display: 'inline-block', marginTop: '4px',
-                background: goldDim, color: gold,
-                border: `1px solid ${goldBorder}`,
-                fontSize: '0.65rem', fontWeight: 500,
+                background: greenDim, color: greenDark,
+                border: `1px solid ${greenBorder}`,
+                fontSize: '0.65rem', fontWeight: 600,
                 padding: '1px 8px', borderRadius: '50px',
-                letterSpacing: '0.08em', textTransform: 'uppercase'
+                letterSpacing: '0.06em', textTransform: 'uppercase'
               }}>
                 {user?.role}
               </span>
@@ -229,9 +228,9 @@ export default function Layout({ children }) {
         {/* Nav Links */}
         <div style={{ padding: '8px 12px', flex: 1 }}>
           <div style={{
-            fontSize: '0.65rem', fontWeight: 400,
+            fontSize: '0.65rem', fontWeight: 500,
             color: mutedColor, textTransform: 'uppercase',
-            letterSpacing: '0.18em', padding: '4px 8px 12px',
+            letterSpacing: '0.14em', padding: '4px 8px 12px',
             fontFamily: 'DM Sans, sans-serif'
           }}>
             Navigation
@@ -248,20 +247,20 @@ export default function Layout({ children }) {
                 marginBottom: '3px',
                 fontFamily: 'DM Sans, sans-serif',
                 fontSize: '0.88rem',
-                fontWeight: isActive(item.path) ? 500 : 300,
+                fontWeight: isActive(item.path) ? 600 : 400,
                 background: isActive(item.path)
-                  ? (dark ? 'rgba(201,169,110,0.12)' : 'rgba(201,169,110,0.1)')
+                  ? (dark ? 'rgba(47,158,99,0.14)' : 'rgba(47,158,99,0.08)')
                   : 'transparent',
-                color: isActive(item.path) ? gold : textColor,
+                color: isActive(item.path) ? greenDark : textColor,
                 borderLeft: isActive(item.path)
-                  ? `2px solid ${gold}`
+                  ? `2px solid ${green}`
                   : '2px solid transparent',
                 transition: 'all 0.15s'
               }}
               onMouseEnter={e => {
                 if (!isActive(item.path)) {
-                  e.currentTarget.style.background = 'rgba(201,169,110,0.06)';
-                  e.currentTarget.style.color = gold;
+                  e.currentTarget.style.background = 'rgba(47,158,99,0.06)';
+                  e.currentTarget.style.color = greenDark;
                 }
               }}
               onMouseLeave={e => {
@@ -277,17 +276,17 @@ export default function Layout({ children }) {
                 <span style={{
                   marginLeft: 'auto',
                   width: '5px', height: '5px',
-                  borderRadius: '50%', background: gold
+                  borderRadius: '50%', background: green
                 }} />
               )}
             </button>
           ))}
         </div>
 
-        {/* Gold divider */}
+        {/* Divider */}
         <div style={{
           margin: '0 20px 8px', height: '1px',
-          background: `linear-gradient(90deg, ${gold}44, transparent)`
+          background: `linear-gradient(90deg, ${green}44, transparent)`
         }} />
 
         {/* Bottom — logout */}
@@ -300,11 +299,11 @@ export default function Layout({ children }) {
               padding: '11px 14px', borderRadius: '10px',
               border: 'none', cursor: 'pointer',
               fontFamily: 'DM Sans, sans-serif',
-              fontSize: '0.88rem', fontWeight: 300,
-              background: 'transparent', color: '#e07070',
+              fontSize: '0.88rem', fontWeight: 400,
+              background: 'transparent', color: '#dc2626',
               transition: 'all 0.15s'
             }}
-            onMouseEnter={e => e.currentTarget.style.background = 'rgba(224,112,112,0.08)'}
+            onMouseEnter={e => e.currentTarget.style.background = 'rgba(220,38,38,0.08)'}
             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
           >
             <span style={{ fontSize: '1rem' }}>🚪</span>
