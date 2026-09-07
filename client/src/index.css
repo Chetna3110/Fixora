@@ -753,7 +753,7 @@ body::after {
   text-transform: uppercase; letter-spacing: 0.04em;
 }
 .hero-visual {
-  width: 60%;
+  width: 40%;
   height: 540px;
   display: flex;
   align-items: center;
