@@ -15,17 +15,17 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'));
 
-  const gold = '#c9a96e';
-  const border = dark ? 'rgba(201,169,110,0.15)' : 'rgba(201,169,110,0.25)';
-  const cardBg = dark ? 'rgba(26,22,14,0.95)' : '#ffffff';
-  const textColor = dark ? 'rgba(255,255,255,0.88)' : '#1a1208';
-  const mutedColor = dark ? 'rgba(255,255,255,0.38)' : 'rgba(26,18,8,0.45)';
+  const green = 'var(--gold)';
+  const border = 'var(--card-border)';
+  const cardBg = 'var(--card)';
+  const textColor = 'var(--text)';
+  const mutedColor = 'var(--text-muted)';
 
   useEffect(() => { fetchIssues(); }, []);
 
   const fetchIssues = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/issues');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/issues`);
       setIssues(res.data);
     } catch (err) { console.log(err); }
   };
@@ -33,7 +33,7 @@ export default function Dashboard() {
   const handleUpvote = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.put(`http://localhost:5000/api/issues/${id}/upvote`, {}, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/issues/${id}/upvote`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       await fetchIssues();
@@ -45,9 +45,9 @@ export default function Dashboard() {
   const hasUpvoted = (issue) => issue.upvotedBy?.includes(user?.id);
 
   const getStatusColor = (status) => {
-    if (status === 'Resolved') return { color: '#6ec99a', bg: 'rgba(110,201,154,0.12)', border: 'rgba(110,201,154,0.25)' };
-    if (status === 'In Progress') return { color: gold, bg: 'rgba(201,169,110,0.12)', border: 'rgba(201,169,110,0.25)' };
-    return { color: '#e07070', bg: 'rgba(224,112,112,0.12)', border: 'rgba(224,112,112,0.25)' };
+    if (status === 'Resolved') return { color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0' };
+    if (status === 'In Progress') return { color: '#d97706', bg: '#fffbeb', border: '#fde68a' };
+    return { color: '#dc2626', bg: '#fef2f2', border: '#fecaca' };
   };
 
   const filteredIssues = issues.filter(issue => {
@@ -64,7 +64,6 @@ export default function Dashboard() {
   const inProgress = issues.filter(i => i.status === 'In Progress').length;
   const resolved = issues.filter(i => i.status === 'Resolved').length;
 
-  // Leaderboard — top reporters by issue count
   const leaderboard = Object.values(
     issues.reduce((acc, issue) => {
       const name = issue.reportedBy?.name || 'Unknown';
@@ -82,38 +81,36 @@ export default function Dashboard() {
 
         {/* ── Welcome Banner */}
         <div style={{
-          background: dark
-            ? 'linear-gradient(135deg, #1a1208 0%, #2d2010 100%)'
-            : 'linear-gradient(135deg, #2d2010 0%, #1a1208 100%)',
+          background: 'linear-gradient(135deg, #1f7a4d 0%, #2f9e63 100%)',
           borderRadius: '16px', padding: '28px 32px',
           marginBottom: '28px',
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          border: `1px solid rgba(201,169,110,0.2)`,
-          position: 'relative', overflow: 'hidden'
+          border: '1px solid rgba(47,158,99,0.25)',
+          position: 'relative', overflow: 'hidden', flexWrap: 'wrap', gap: '16px'
         }}>
           <div style={{
             position: 'absolute', top: '-40px', right: '-40px',
             width: '200px', height: '200px',
-            background: 'rgba(201,169,110,0.06)',
+            background: 'rgba(255,255,255,0.06)',
             borderRadius: '50%'
           }} />
           <div style={{ position: 'relative', zIndex: 1 }}>
             <p style={{
-              fontSize: '0.72rem', letterSpacing: '0.2em',
-              textTransform: 'uppercase', color: gold,
-              marginBottom: '8px', fontWeight: 400,
+              fontSize: '0.72rem', letterSpacing: '0.15em',
+              textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)',
+              marginBottom: '8px', fontWeight: 600,
               fontFamily: 'DM Sans, sans-serif'
             }}>
               Fixora Dashboard
             </p>
             <h2 style={{
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: '1.8rem', fontWeight: 300,
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+              fontSize: '1.7rem', fontWeight: 800,
               color: 'white', marginBottom: '6px'
             }}>
-              Welcome back, <em style={{ fontStyle: 'italic', color: gold }}>{user?.name?.split(' ')[0]}</em>
+              Welcome back, {user?.name?.split(' ')[0]}
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.88rem', fontWeight: 300 }}>
+            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.88rem', fontWeight: 400 }}>
               {issues.length} total issues in your community
             </p>
           </div>
@@ -121,13 +118,13 @@ export default function Dashboard() {
             <button
               onClick={() => setShowLeaderboard(!showLeaderboard)}
               style={{
-                background: 'rgba(201,169,110,0.15)',
-                border: `1px solid rgba(201,169,110,0.3)`,
+                background: 'rgba(255,255,255,0.15)',
+                border: '1px solid rgba(255,255,255,0.3)',
                 borderRadius: '8px', padding: '10px 18px',
-                color: gold, cursor: 'pointer',
+                color: 'white', cursor: 'pointer',
                 fontFamily: 'DM Sans, sans-serif',
-                fontSize: '0.82rem', fontWeight: 500,
-                letterSpacing: '0.05em'
+                fontSize: '0.82rem', fontWeight: 600,
+                letterSpacing: '0.03em'
               }}>
               🏆 Leaderboard
             </button>
@@ -135,12 +132,12 @@ export default function Dashboard() {
               className="btn"
               onClick={() => navigate('/report')}
               style={{
-                background: gold, color: '#0d0d0f',
+                background: 'white', color: '#1f7a4d',
                 border: 'none', borderRadius: '8px',
                 padding: '10px 20px',
                 fontFamily: 'DM Sans, sans-serif',
-                fontSize: '0.82rem', fontWeight: 500,
-                letterSpacing: '0.07em', textTransform: 'uppercase',
+                fontSize: '0.82rem', fontWeight: 700,
+                letterSpacing: '0.03em',
                 cursor: 'pointer'
               }}>
               + Report Issue
@@ -151,28 +148,28 @@ export default function Dashboard() {
         {/* ── Mini Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '28px' }}>
           {[
-            { label: 'Pending', value: pending, color: '#e07070' },
-            { label: 'In Progress', value: inProgress, color: gold },
-            { label: 'Resolved', value: resolved, color: '#6ec99a' },
+            { label: 'Pending', value: pending, color: '#dc2626' },
+            { label: 'In Progress', value: inProgress, color: '#d97706' },
+            { label: 'Resolved', value: resolved, color: '#16a34a' },
           ].map(s => (
             <div key={s.label} style={{
               background: cardBg,
               border: `1px solid ${border}`,
-              borderTop: `2px solid ${s.color}`,
+              borderTop: `3px solid ${s.color}`,
               borderRadius: '12px', padding: '20px',
               textAlign: 'center', transition: 'all 0.4s'
             }}>
               <div style={{
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: '2.2rem', fontWeight: 600,
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+                fontSize: '2rem', fontWeight: 800,
                 color: s.color, lineHeight: 1
               }}>
                 {s.value}
               </div>
               <div style={{
                 color: mutedColor, fontSize: '0.72rem',
-                fontWeight: 400, marginTop: '6px',
-                textTransform: 'uppercase', letterSpacing: '0.1em'
+                fontWeight: 600, marginTop: '6px',
+                textTransform: 'uppercase', letterSpacing: '0.08em'
               }}>{s.label}</div>
             </div>
           ))}
@@ -185,16 +182,16 @@ export default function Dashboard() {
             border: `1px solid ${border}`,
             borderRadius: '14px', padding: '24px',
             marginBottom: '28px',
-            boxShadow: dark ? '0 8px 32px rgba(0,0,0,0.3)' : '0 4px 20px rgba(201,169,110,0.08)'
+            boxShadow: 'var(--shadow-card)'
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
               <div>
-                <p style={{ fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: gold, marginBottom: '4px' }}>
+                <p style={{ fontSize: '0.68rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold-dark)', marginBottom: '4px', fontWeight: 700 }}>
                   Community
                 </p>
                 <h3 style={{
-                  fontFamily: 'Cormorant Garamond, serif',
-                  fontSize: '1.4rem', fontWeight: 400, color: textColor
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
+                  fontSize: '1.3rem', fontWeight: 800, color: textColor
                 }}>
                   🏆 Top Reporters
                 </h3>
@@ -213,38 +210,33 @@ export default function Dashboard() {
               <div key={person.name} style={{
                 display: 'flex', alignItems: 'center', gap: '14px',
                 padding: '12px 16px', borderRadius: '10px', marginBottom: '8px',
-                background: i === 0
-                  ? (dark ? 'rgba(201,169,110,0.1)' : 'rgba(201,169,110,0.08)')
-                  : 'transparent',
-                border: i === 0 ? `1px solid rgba(201,169,110,0.2)` : '1px solid transparent',
+                background: i === 0 ? 'var(--section-label-bg)' : 'transparent',
+                border: i === 0 ? '1px solid var(--section-label-border)' : '1px solid transparent',
                 transition: 'all 0.2s'
               }}>
-                {/* Rank */}
                 <div style={{
                   width: '32px', height: '32px', flexShrink: 0,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: 'Cormorant Garamond, serif',
+                  fontFamily: 'Plus Jakarta Sans, sans-serif',
                   fontSize: i < 3 ? '1.3rem' : '1rem',
-                  fontWeight: 600
+                  fontWeight: 700
                 }}>
                   {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `#${i + 1}`}
                 </div>
 
-                {/* Avatar */}
                 <div style={{
                   width: '36px', height: '36px', flexShrink: 0,
-                  background: `linear-gradient(135deg, ${gold}, #a8833a)`,
+                  background: 'linear-gradient(135deg, #2f9e63, #1f7a4d)',
                   borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: '#0d0d0f', fontWeight: 700, fontSize: '0.9rem'
+                  color: '#fff', fontWeight: 700, fontSize: '0.9rem'
                 }}>
                   {person.name?.charAt(0).toUpperCase()}
                 </div>
 
-                {/* Name */}
                 <div style={{ flex: 1 }}>
                   <div style={{
-                    fontWeight: i === 0 ? 600 : 400,
+                    fontWeight: i === 0 ? 700 : 500,
                     color: textColor, fontSize: '0.9rem',
                     fontFamily: 'DM Sans, sans-serif'
                   }}>
@@ -252,11 +244,11 @@ export default function Dashboard() {
                     {i === 0 && (
                       <span style={{
                         marginLeft: '8px',
-                        background: 'rgba(201,169,110,0.15)',
-                        border: '1px solid rgba(201,169,110,0.3)',
-                        color: gold, fontSize: '0.65rem',
+                        background: 'var(--section-label-bg)',
+                        border: '1px solid var(--section-label-border)',
+                        color: 'var(--gold-dark)', fontSize: '0.65rem',
                         padding: '1px 8px', borderRadius: '50px',
-                        letterSpacing: '0.08em', textTransform: 'uppercase'
+                        letterSpacing: '0.06em', textTransform: 'uppercase', fontWeight: 700
                       }}>Top Reporter</span>
                     )}
                   </div>
@@ -265,15 +257,14 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                {/* Count */}
                 <div style={{ textAlign: 'right' }}>
                   <div style={{
-                    fontFamily: 'Cormorant Garamond, serif',
-                    fontSize: '1.4rem', fontWeight: 600, color: gold, lineHeight: 1
+                    fontFamily: 'Plus Jakarta Sans, sans-serif',
+                    fontSize: '1.3rem', fontWeight: 800, color: 'var(--gold-dark)', lineHeight: 1
                   }}>
                     {person.count}
                   </div>
-                  <div style={{ color: mutedColor, fontSize: '0.7rem', letterSpacing: '0.06em' }}>
+                  <div style={{ color: mutedColor, fontSize: '0.7rem', letterSpacing: '0.04em' }}>
                     issues
                   </div>
                 </div>
@@ -284,10 +275,7 @@ export default function Dashboard() {
 
         {/* ── Search + Filters */}
         <div style={{ marginBottom: '20px' }}>
-          {/* Search Bar */}
-          <div style={{
-            position: 'relative', marginBottom: '16px'
-          }}>
+          <div style={{ position: 'relative', marginBottom: '16px' }}>
             <span style={{
               position: 'absolute', left: '14px', top: '50%',
               transform: 'translateY(-50%)',
@@ -301,18 +289,18 @@ export default function Dashboard() {
               style={{
                 width: '100%', padding: '12px 14px 12px 42px',
                 background: cardBg,
-                border: `1px solid ${searchQuery ? gold : border}`,
+                border: `1px solid ${searchQuery ? 'var(--gold)' : border}`,
                 borderRadius: '10px',
                 color: textColor,
                 fontFamily: 'DM Sans, sans-serif',
-                fontSize: '0.9rem', fontWeight: 300,
+                fontSize: '0.9rem', fontWeight: 400,
                 outline: 'none',
                 transition: 'border-color 0.2s, box-shadow 0.2s',
-                boxShadow: searchQuery ? `0 0 0 3px rgba(201,169,110,0.08)` : 'none'
+                boxShadow: searchQuery ? '0 0 0 3px rgba(47,158,99,0.1)' : 'none'
               }}
               onFocus={e => {
-                e.target.style.borderColor = gold;
-                e.target.style.boxShadow = '0 0 0 3px rgba(201,169,110,0.08)';
+                e.target.style.borderColor = 'var(--gold)';
+                e.target.style.boxShadow = '0 0 0 3px rgba(47,158,99,0.1)';
               }}
               onBlur={e => {
                 if (!searchQuery) {
@@ -333,19 +321,18 @@ export default function Dashboard() {
             )}
           </div>
 
-          {/* Filters row */}
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <span style={{ color: mutedColor, fontSize: '0.72rem', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <span style={{ color: mutedColor, fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
               Status:
             </span>
             {['All', 'Pending', 'In Progress', 'Resolved'].map(f => (
               <button key={f} onClick={() => setFilter(f)}
                 style={{
                   padding: '5px 14px', borderRadius: '50px',
-                  border: `1px solid ${filter === f ? gold : border}`,
-                  background: filter === f ? 'rgba(201,169,110,0.12)' : 'transparent',
-                  color: filter === f ? gold : mutedColor,
-                  fontWeight: filter === f ? 500 : 300,
+                  border: `1px solid ${filter === f ? 'var(--gold)' : border}`,
+                  background: filter === f ? 'var(--section-label-bg)' : 'transparent',
+                  color: filter === f ? 'var(--gold-dark)' : mutedColor,
+                  fontWeight: filter === f ? 700 : 400,
                   fontSize: '0.82rem', cursor: 'pointer',
                   fontFamily: 'DM Sans, sans-serif',
                   transition: 'all 0.2s'
@@ -353,7 +340,7 @@ export default function Dashboard() {
                 {f}
               </button>
             ))}
-            <span style={{ color: mutedColor, fontSize: '0.72rem', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'uppercase', marginLeft: '8px' }}>
+            <span style={{ color: mutedColor, fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', marginLeft: '8px' }}>
               Category:
             </span>
             <select
@@ -378,19 +365,19 @@ export default function Dashboard() {
         </div>
 
         {/* ── Issues Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '8px' }}>
           <div>
-            <p style={{ fontSize: '0.68rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: gold, marginBottom: '2px' }}>
+            <p style={{ fontSize: '0.68rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--gold-dark)', marginBottom: '2px', fontWeight: 700 }}>
               Community Issues
             </p>
             <h2 style={{
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: '1.4rem', fontWeight: 400, color: textColor
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+              fontSize: '1.3rem', fontWeight: 800, color: textColor
             }}>
               {filteredIssues.length} Issue{filteredIssues.length !== 1 ? 's' : ''} Found
             </h2>
           </div>
-          <p style={{ color: mutedColor, fontSize: '0.82rem', fontWeight: 300 }}>
+          <p style={{ color: mutedColor, fontSize: '0.82rem', fontWeight: 400 }}>
             Click any issue to view full details
           </p>
         </div>
@@ -404,10 +391,10 @@ export default function Dashboard() {
             <button
               onClick={() => navigate('/report')}
               style={{
-                marginTop: '16px', background: gold, color: '#0d0d0f',
+                marginTop: '16px', background: 'var(--gold)', color: '#fff',
                 border: 'none', borderRadius: '8px', padding: '10px 24px',
                 fontFamily: 'DM Sans, sans-serif', fontSize: '0.85rem',
-                fontWeight: 500, cursor: 'pointer', letterSpacing: '0.05em'
+                fontWeight: 700, cursor: 'pointer', letterSpacing: '0.03em'
               }}>
               + Report an Issue
             </button>
@@ -432,24 +419,19 @@ export default function Dashboard() {
                     overflow: 'hidden',
                     cursor: 'pointer',
                     transition: 'all 0.25s',
-                    boxShadow: dark ? '0 2px 12px rgba(0,0,0,0.2)' : '0 2px 12px rgba(201,169,110,0.06)'
+                    boxShadow: 'var(--shadow-card)'
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.transform = 'translateY(-3px)';
-                    e.currentTarget.style.boxShadow = dark
-                      ? '0 8px 32px rgba(0,0,0,0.3)'
-                      : '0 8px 28px rgba(201,169,110,0.14)';
-                    e.currentTarget.style.borderColor = gold;
+                    e.currentTarget.style.boxShadow = '0 8px 28px rgba(47,158,99,0.14)';
+                    e.currentTarget.style.borderColor = 'var(--gold)';
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = dark
-                      ? '0 2px 12px rgba(0,0,0,0.2)'
-                      : '0 2px 12px rgba(201,169,110,0.06)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-card)';
                     e.currentTarget.style.borderColor = border;
                   }}>
 
-                  {/* Image */}
                   {issue.imageUrl ? (
                     <div style={{ position: 'relative' }}>
                       <img src={issue.imageUrl} alt="Issue"
@@ -457,7 +439,6 @@ export default function Dashboard() {
                           width: '100%', height: '180px',
                           objectFit: 'cover', display: 'block'
                         }} />
-                      {/* Status badge over image */}
                       <span style={{
                         position: 'absolute', top: '10px', right: '10px',
                         background: sc.bg,
@@ -465,27 +446,24 @@ export default function Dashboard() {
                         color: sc.color,
                         backdropFilter: 'blur(8px)',
                         padding: '3px 10px', borderRadius: '50px',
-                        fontSize: '0.7rem', fontWeight: 500,
-                        letterSpacing: '0.05em'
+                        fontSize: '0.7rem', fontWeight: 600,
+                        letterSpacing: '0.03em'
                       }}>
                         {issue.status}
                       </span>
                     </div>
                   ) : (
-                    /* No image — colored top bar */
                     <div style={{
                       height: '6px',
                       background: `linear-gradient(90deg, ${sc.color}, ${sc.color}88)`
                     }} />
                   )}
 
-                  {/* Card Content */}
                   <div style={{ padding: '16px' }}>
-                    {/* Title + status (if no image) */}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
                       <h3 style={{
-                        fontFamily: 'Cormorant Garamond, serif',
-                        fontSize: '1.05rem', fontWeight: 600,
+                        fontFamily: 'Plus Jakarta Sans, sans-serif',
+                        fontSize: '1rem', fontWeight: 700,
                         color: textColor, lineHeight: 1.3, flex: 1
                       }}>
                         {issue.title}
@@ -495,7 +473,7 @@ export default function Dashboard() {
                           background: sc.bg, border: `1px solid ${sc.border}`,
                           color: sc.color, padding: '2px 8px',
                           borderRadius: '50px', fontSize: '0.68rem',
-                          fontWeight: 500, flexShrink: 0, letterSpacing: '0.04em'
+                          fontWeight: 600, flexShrink: 0, letterSpacing: '0.02em'
                         }}>
                           {issue.status}
                         </span>
@@ -505,14 +483,13 @@ export default function Dashboard() {
                     <p style={{
                       color: mutedColor, fontSize: '0.83rem',
                       lineHeight: 1.6, marginBottom: '12px',
-                      fontWeight: 300,
+                      fontWeight: 400,
                       overflow: 'hidden', display: '-webkit-box',
                       WebkitLineClamp: 2, WebkitBoxOrient: 'vertical'
                     }}>
                       {issue.description}
                     </p>
 
-                    {/* Location */}
                     {issue.location?.address && (
                       <div style={{
                         fontSize: '0.75rem', color: mutedColor,
@@ -526,19 +503,16 @@ export default function Dashboard() {
                       </div>
                     )}
 
-                    {/* Divider */}
                     <div style={{ height: '1px', background: border, marginBottom: '12px' }} />
 
-                    {/* Meta row */}
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        {/* Category */}
                         <span style={{
-                          background: 'rgba(201,169,110,0.1)',
-                          border: `1px solid rgba(201,169,110,0.2)`,
-                          color: gold, padding: '2px 8px',
+                          background: 'var(--tag-bg)',
+                          border: '1px solid var(--card-border)',
+                          color: 'var(--tag-color)', padding: '2px 8px',
                           borderRadius: '4px', fontSize: '0.7rem',
-                          fontWeight: 500, letterSpacing: '0.03em'
+                          fontWeight: 600, letterSpacing: '0.02em'
                         }}>
                           {issue.category}
                         </span>
@@ -547,7 +521,6 @@ export default function Dashboard() {
                         </span>
                       </div>
 
-                      {/* Upvote */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -555,13 +528,11 @@ export default function Dashboard() {
                         }}
                         disabled={hasUpvoted(issue)}
                         style={{
-                          background: hasUpvoted(issue)
-                            ? 'rgba(201,169,110,0.12)'
-                            : 'transparent',
-                          border: `1px solid ${hasUpvoted(issue) ? gold : border}`,
+                          background: hasUpvoted(issue) ? 'var(--section-label-bg)' : 'transparent',
+                          border: `1px solid ${hasUpvoted(issue) ? 'var(--gold)' : border}`,
                           borderRadius: '6px', padding: '4px 10px',
-                          color: hasUpvoted(issue) ? gold : mutedColor,
-                          fontSize: '0.75rem', fontWeight: 500,
+                          color: hasUpvoted(issue) ? 'var(--gold-dark)' : mutedColor,
+                          fontSize: '0.75rem', fontWeight: 600,
                           cursor: hasUpvoted(issue) ? 'not-allowed' : 'pointer',
                           fontFamily: 'DM Sans, sans-serif',
                           display: 'flex', alignItems: 'center', gap: '4px',
@@ -571,11 +542,10 @@ export default function Dashboard() {
                       </button>
                     </div>
 
-                    {/* View details */}
                     <div style={{
                       marginTop: '10px', textAlign: 'right',
-                      fontSize: '0.75rem', color: gold,
-                      fontWeight: 400, letterSpacing: '0.05em'
+                      fontSize: '0.75rem', color: 'var(--gold-dark)',
+                      fontWeight: 600, letterSpacing: '0.03em'
                     }}>
                       View Details →
                     </div>
@@ -587,14 +557,13 @@ export default function Dashboard() {
         )}
       </div>
 
-      {/* Issue Detail Modal */}
       {selectedIssue && (
         <IssueModal
           issue={selectedIssue}
           onClose={() => setSelectedIssue(null)}
           onUpvote={async (id) => {
             await handleUpvote(id);
-            const res = await axios.get('http://localhost:5000/api/issues');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/issues`);
             const fresh = res.data.find(i => i._id === id);
             if (fresh) setSelectedIssue(fresh);
           }}

@@ -6,17 +6,16 @@ import Logo from '../Logo';
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
-  const [lampOn, setLampOn] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     setLoading(true);
     try {
-const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, form);      localStorage.setItem('token', res.data.token);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, form);
+      localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
 
-      // ── Role-based redirect
       const role = res.data.user.role;
       if (role === 'admin') navigate('/admin');
       else if (role === 'worker') navigate('/worker');
@@ -28,143 +27,97 @@ const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, form)
     setLoading(false);
   };
 
-  const dark = lampOn;
-
   return (
     <div style={{
       minHeight: '100vh',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      position: 'relative',
-      background: dark
-        ? 'linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%)'
-        : 'linear-gradient(135deg, #e8edf5 0%, #f4f6fb 100%)',
-      transition: 'background 0.6s ease',
-      padding: '20px'
+      background: '#ffffff'
     }}>
 
-      {/* Lamp glow */}
-      {lampOn && (
-        <div style={{
-          position: 'fixed', top: 0, left: '50%',
-          transform: 'translateX(-50%)',
-          width: '600px', height: '400px',
-          background: 'radial-gradient(ellipse at 50% 0%, rgba(255,200,80,0.18) 0%, transparent 70%)',
-          pointerEvents: 'none', zIndex: 0, transition: 'opacity 0.6s ease'
-        }} />
-      )}
-
+      {/* LEFT — Branding panel */}
       <div style={{
-        display: 'flex', alignItems: 'center', gap: '48px',
-        position: 'relative', zIndex: 1,
-        width: '100%', maxWidth: '860px',
-        flexWrap: 'wrap', justifyContent: 'center'
-      }}>
-
-        {/* LAMP */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer' }}
-          onClick={() => setLampOn(!lampOn)}>
-          <div style={{
-            width: '110px', height: '70px',
-            background: lampOn
-              ? 'linear-gradient(180deg, #d4a017, #f5c842)'
-              : 'linear-gradient(180deg, #c8c8c8, #e8e8e8)',
-            borderRadius: '50% 50% 0 0 / 60% 60% 0 0',
-            boxShadow: lampOn
-              ? '0 0 40px rgba(255,200,80,0.8), 0 0 80px rgba(255,200,80,0.4), 0 8px 20px rgba(0,0,0,0.3)'
-              : '0 4px 12px rgba(0,0,0,0.15)',
-            transition: 'all 0.5s ease',
-            position: 'relative', display: 'flex',
-            alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '6px'
-          }}>
-            {lampOn && (
-              <div style={{
-                position: 'absolute', bottom: 0, left: '50%',
-                transform: 'translateX(-50%)',
-                width: '70px', height: '30px',
-                background: 'rgba(255,240,150,0.6)',
-                borderRadius: '50%', filter: 'blur(8px)'
-              }} />
-            )}
-          </div>
-          <div style={{
-            width: '8px', height: '120px',
-            background: lampOn
-              ? 'linear-gradient(180deg, #b8860b, #8b6914)'
-              : 'linear-gradient(180deg, #aaa, #888)',
-            borderRadius: '4px', transition: 'all 0.5s ease',
-            boxShadow: lampOn ? '0 0 8px rgba(255,200,80,0.3)' : 'none'
-          }} />
-          <div style={{
-            width: '80px', height: '16px',
-            background: lampOn
-              ? 'linear-gradient(180deg, #b8860b, #7a5c0a)'
-              : 'linear-gradient(180deg, #aaa, #777)',
-            borderRadius: '8px', transition: 'all 0.5s ease',
-            boxShadow: lampOn ? '0 0 20px rgba(255,200,80,0.4)' : '0 2px 6px rgba(0,0,0,0.2)'
-          }} />
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '8px' }}>
-            <div style={{
-              width: '1.5px', height: '30px',
-              background: dark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.25)',
-              transition: 'all 0.4s'
-            }} />
-            <div style={{
-              width: '10px', height: '10px',
-              background: lampOn ? '#f5c842' : '#aaa',
-              borderRadius: '50%',
-              boxShadow: lampOn ? '0 0 8px rgba(255,200,80,0.8)' : 'none',
-              transition: 'all 0.4s'
-            }} />
-          </div>
-          <p style={{
-            marginTop: '10px', fontSize: '0.75rem',
-            color: dark ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.35)',
-            fontFamily: 'Outfit, sans-serif', transition: 'color 0.4s'
-          }}>
-            {lampOn ? '💡 Click to turn off' : '🌑 Click to turn on'}
-          </p>
-        </div>
-
-        {/* LOGIN CARD */}
+        flex: '1 1 45%',
+        background: 'linear-gradient(160deg, #1f7a4d 0%, #2f9e63 100%)',
+        display: 'flex', flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '60px', color: 'white',
+        position: 'relative', overflow: 'hidden',
+        minHeight: '340px'
+      }}
+      className="auth-side-panel">
         <div style={{
-          background: dark ? 'rgba(30,30,50,0.95)' : 'white',
-          borderRadius: '18px', padding: '44px 40px',
-          width: '100%', maxWidth: '400px',
-          boxShadow: dark
-            ? '0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,200,80,0.1)'
-            : '0 8px 40px rgba(0,0,0,0.1)',
-          border: dark ? '1px solid rgba(255,255,255,0.06)' : '1px solid #e5e7eb',
-          transition: 'all 0.5s ease',
-          animation: 'slideUp 0.5s ease forwards'
-        }}>
+          position: 'absolute', top: '-100px', right: '-100px',
+          width: '320px', height: '320px',
+          background: 'rgba(255,255,255,0.06)', borderRadius: '50%'
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-80px', left: '-60px',
+          width: '260px', height: '260px',
+          background: 'rgba(255,255,255,0.05)', borderRadius: '50%'
+        }} />
 
-          {/* Logo */}
-          <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '8px' }}>
-              <Logo size={36} />
-              <span style={{
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-                fontSize: '1.8rem', fontWeight: 800,
-                color: dark ? '#f5c842' : '#1a56db',
-                transition: 'color 0.5s'
-              }}>Fixora</span>
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '380px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '32px' }}>
+            <Logo size={36} />
+            <span style={{ fontFamily: 'Plus Jakarta Sans, sans-serif', fontSize: '1.5rem', fontWeight: 800 }}>Fixora</span>
+          </div>
+          <h1 style={{
+            fontFamily: 'Plus Jakarta Sans, sans-serif',
+            fontSize: '2.1rem', fontWeight: 800,
+            lineHeight: 1.2, marginBottom: '16px'
+          }}>
+            Welcome back to your civic dashboard
+          </h1>
+          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '36px' }}>
+            Sign in to track reported issues, follow their progress, and stay connected with your community.
+          </p>
+
+          {[
+            { icon: '📊', text: 'Real-time issue tracking' },
+            { icon: '🗺️', text: 'Live citywide map view' },
+            { icon: '🔔', text: 'Instant status notifications' },
+          ].map(f => (
+            <div key={f.text} style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
+              <div style={{
+                width: '34px', height: '34px', flexShrink: 0,
+                background: 'rgba(255,255,255,0.15)', borderRadius: '9px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem'
+              }}>{f.icon}</div>
+              <span style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.9)' }}>{f.text}</span>
             </div>
-            <p style={{ color: dark ? 'rgba(255,255,255,0.45)' : '#6b7280', fontSize: '0.9rem', transition: 'color 0.5s' }}>
-              Welcome back! Sign in to continue
+          ))}
+        </div>
+      </div>
+
+      {/* RIGHT — Form panel */}
+      <div style={{
+        flex: '1 1 55%',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '40px 20px'
+      }}>
+        <div style={{ width: '100%', maxWidth: '380px' }}>
+
+          <div style={{ marginBottom: '32px' }}>
+            <h2 style={{
+              fontFamily: 'Plus Jakarta Sans, sans-serif',
+              fontSize: '1.6rem', fontWeight: 800, color: '#172420', marginBottom: '6px'
+            }}>
+              Sign in
+            </h2>
+            <p style={{ color: '#64766c', fontSize: '0.9rem' }}>
+              Don't have an account?{' '}
+              <span onClick={() => navigate('/register')} style={{ color: '#2f9e63', fontWeight: 600, cursor: 'pointer' }}>
+                Create one free
+              </span>
             </p>
           </div>
 
-          {/* Role badges — visual hint */}
-          <div style={{
-            display: 'flex', gap: '8px', justifyContent: 'center',
-            marginBottom: '24px', flexWrap: 'wrap'
-          }}>
+          {/* Role badges */}
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
             {[
-              { role: 'Admin', icon: '👑', color: '#dc2626', bg: dark ? 'rgba(220,38,38,0.15)' : '#fef2f2', border: 'rgba(220,38,38,0.25)' },
-              { role: 'Worker', icon: '🔧', color: '#d97706', bg: dark ? 'rgba(217,119,6,0.15)' : '#fffbeb', border: 'rgba(217,119,6,0.25)' },
-              { role: 'User', icon: '👤', color: '#1a56db', bg: dark ? 'rgba(26,86,219,0.15)' : '#eff6ff', border: 'rgba(26,86,219,0.25)' },
+              { role: 'Admin', icon: '👑', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' },
+              { role: 'Worker', icon: '🔧', color: '#d97706', bg: '#fffbeb', border: '#fde68a' },
+              { role: 'Citizen', icon: '👤', color: '#2f9e63', bg: '#eefaf3', border: '#cdeedb' },
             ].map(r => (
               <div key={r.role} style={{
                 display: 'flex', alignItems: 'center', gap: '5px',
@@ -177,111 +130,58 @@ const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, form)
             ))}
           </div>
 
-          {/* Email */}
           <div className="form-group">
-            <label style={{ color: dark ? 'rgba(255,255,255,0.75)' : '#111928' }}>Email Address</label>
+            <label>Email Address</label>
             <input
+              className="form-input"
               type="email"
               placeholder="you@example.com"
               value={form.email}
               onChange={e => setForm({ ...form, email: e.target.value })}
               onKeyDown={e => e.key === 'Enter' && handleSubmit()}
-              style={{
-                width: '100%', padding: '11px 14px',
-                borderRadius: '8px', outline: 'none',
-                fontFamily: 'Outfit, sans-serif', fontSize: '0.92rem',
-                border: dark ? '1.5px solid rgba(255,255,255,0.1)' : '1.5px solid #e5e7eb',
-                background: dark ? 'rgba(255,255,255,0.06)' : '#fafafa',
-                color: dark ? 'white' : '#111928', transition: 'all 0.5s'
-              }}
             />
           </div>
 
-          {/* Password */}
           <div className="form-group">
-            <label style={{ color: dark ? 'rgba(255,255,255,0.75)' : '#111928' }}>Password</label>
+            <label>Password</label>
             <input
+              className="form-input"
               type="password"
               placeholder="Enter your password"
               value={form.password}
               onChange={e => setForm({ ...form, password: e.target.value })}
               onKeyDown={e => e.key === 'Enter' && handleSubmit()}
-              style={{
-                width: '100%', padding: '11px 14px',
-                borderRadius: '8px', outline: 'none',
-                fontFamily: 'Outfit, sans-serif', fontSize: '0.92rem',
-                border: dark ? '1.5px solid rgba(255,255,255,0.1)' : '1.5px solid #e5e7eb',
-                background: dark ? 'rgba(255,255,255,0.06)' : '#fafafa',
-                color: dark ? 'white' : '#111928', transition: 'all 0.5s'
-              }}
             />
           </div>
 
           <button
+            className="btn btn-primary"
             onClick={handleSubmit}
             disabled={loading}
-            style={{
-              width: '100%', padding: '13px',
-              fontSize: '1rem', marginTop: '8px',
-              borderRadius: '10px', border: 'none',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight: 700, fontFamily: 'Outfit, sans-serif',
-              background: dark
-                ? 'linear-gradient(135deg, #f5c842, #e6a817)'
-                : 'linear-gradient(135deg, #1a56db, #2563eb)',
-              color: dark ? '#1a1a00' : 'white',
-              boxShadow: dark
-                ? '0 4px 15px rgba(245,200,66,0.4)'
-                : '0 4px 12px rgba(26,86,219,0.3)',
-              opacity: loading ? 0.75 : 1,
-              transition: 'all 0.5s'
-            }}>
+            style={{ width: '100%', padding: '13px', fontSize: '0.95rem', marginTop: '8px', borderRadius: '10px' }}>
             {loading ? '⏳ Signing in...' : 'Sign In →'}
           </button>
 
-          {/* Role redirect info */}
           <div style={{
             marginTop: '16px', padding: '12px 14px',
-            background: dark ? 'rgba(255,255,255,0.05)' : '#f8faff',
-            border: `1px solid ${dark ? 'rgba(255,255,255,0.08)' : '#e5e7eb'}`,
+            background: '#f8faf9', border: '1px solid #e6ece8',
             borderRadius: '8px', fontSize: '0.78rem',
-            color: dark ? 'rgba(255,255,255,0.4)' : '#6b7280',
-            lineHeight: 1.6
+            color: '#64766c', lineHeight: 1.6
           }}>
-            👑 Admin → Admin Panel &nbsp;·&nbsp; 🔧 Worker → Worker Dashboard &nbsp;·&nbsp; 👤 User → Dashboard
+            👑 Admin → Admin Panel &nbsp;·&nbsp; 🔧 Worker → Worker Dashboard &nbsp;·&nbsp; 👤 Citizen → Dashboard
           </div>
 
           {message && <p className="alert-error" style={{ marginTop: '12px' }}>{message}</p>}
 
-          <p style={{
-            textAlign: 'center', marginTop: '20px',
-            color: dark ? 'rgba(255,255,255,0.4)' : '#6b7280',
-            fontSize: '0.88rem', transition: 'color 0.5s'
-          }}>
-            Don't have an account?{' '}
-            <span onClick={() => navigate('/register')}
-              style={{
-                color: dark ? '#f5c842' : '#1a56db',
-                cursor: 'pointer', fontWeight: 600, transition: 'color 0.5s'
-              }}>
-              Create one free
-            </span>
-          </p>
-
-          <p style={{
-            textAlign: 'center', marginTop: '14px', fontSize: '0.78rem',
-            color: dark ? 'rgba(255,255,255,0.25)' : '#9ca3af',
-            transition: 'color 0.5s'
-          }}>
+          <p style={{ textAlign: 'center', marginTop: '20px', fontSize: '0.78rem', color: '#9aa8a1' }}>
             🔒 Your data is safe and encrypted
           </p>
         </div>
       </div>
 
       <style>{`
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to { opacity: 1; transform: translateY(0); }
+        @media (max-width: 800px) {
+          .auth-side-panel { display: none; }
         }
       `}</style>
     </div>
