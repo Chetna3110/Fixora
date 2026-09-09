@@ -13,6 +13,8 @@ import Guilds from './pages/Guilds';
 import Layout from './components/Layout';
 import WorkerDashboard from './pages/WorkerDashboard';
 import MapView from './pages/MapView';
+import Profile from './pages/Profile';
+
 
 // ✅ Protects any route that requires login
 function ProtectedRoute({ children }) {
@@ -71,6 +73,7 @@ function App() {
                 <Layout><Guilds /></Layout>
               </ProtectedRoute>
             } />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/worker" element={
               <ProtectedRoute>
                 <Layout><WorkerDashboard /></Layout>

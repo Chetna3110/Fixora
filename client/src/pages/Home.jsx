@@ -81,6 +81,7 @@ export default function Home() {
                       </div>
                     </div>
                     <button className="dropdown-item" onClick={() => { navigate('/dashboard'); setDropdownOpen(false); }}>📊 My Dashboard</button>
+                    <button className="dropdown-item" onClick={() => { navigate('/profile'); setDropdownOpen(false); }}>👤 My Profile</button>
                     <button className="dropdown-item" onClick={() => { navigate('/report'); setDropdownOpen(false); }}>📝 Report Issue</button>
                     <div className="dropdown-divider" />
                     <button className="dropdown-item danger" onClick={handleLogout}>🚪 Logout</button>

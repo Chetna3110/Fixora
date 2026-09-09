@@ -21,6 +21,7 @@ export default function Layout({ children }) {
     { icon: '📝', label: 'Report Issue', path: '/report' },
     { icon: '🏰', label: 'Guilds', path: '/guilds' },
     { icon: '📧', label: 'Contact', path: '/contact' },
+    { icon: '👤', label: 'My Profile', path: '/profile' },
     ...(user?.role === 'admin' ? [{ icon: '⚙️', label: 'Admin Panel', path: '/admin' }] : []),
   ];
 
