@@ -5,6 +5,7 @@ import Logo from '../Logo';
 
 export default function Layout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { dark, toggleTheme } = useTheme();
@@ -20,8 +21,8 @@ export default function Layout({ children }) {
     { icon: '🗺️', label: 'Live Map', path: '/map' },
     { icon: '📝', label: 'Report Issue', path: '/report' },
     { icon: '🏰', label: 'Guilds', path: '/guilds' },
-    { icon: '📧', label: 'Contact', path: '/contact' },
     { icon: '👤', label: 'My Profile', path: '/profile' },
+    { icon: '📧', label: 'Contact', path: '/contact' },
     ...(user?.role === 'admin' ? [{ icon: '⚙️', label: 'Admin Panel', path: '/admin' }] : []),
   ];
 
@@ -91,8 +92,8 @@ export default function Layout({ children }) {
           </div>
         </div>
 
-        {/* Right — theme toggle + profile */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Right — theme toggle + profile dropdown */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', position: 'relative' }}>
           <button onClick={toggleTheme} style={{
             background: dark ? 'rgba(47,158,99,0.1)' : 'rgba(47,158,99,0.08)',
             border: `1px solid ${border}`,
@@ -105,30 +106,118 @@ export default function Layout({ children }) {
             {dark ? '☀️ Light' : '🌙 Dark'}
           </button>
 
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            background: dark ? 'rgba(47,158,99,0.1)' : 'rgba(47,158,99,0.08)',
-            border: `1px solid ${border}`,
-            borderRadius: '50px', padding: '4px 14px 4px 4px',
-            transition: 'all 0.3s'
-          }}>
+          {/* Profile button — click to open dropdown */}
+          <button
+            onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              background: dark ? 'rgba(47,158,99,0.1)' : 'rgba(47,158,99,0.08)',
+              border: `1px solid ${border}`,
+              borderRadius: '50px', padding: '4px 14px 4px 4px',
+              transition: 'all 0.3s', cursor: 'pointer'
+            }}>
             <div style={{
-              width: '30px', height: '30px',
+              width: '30px', height: '30px', borderRadius: '50%',
+              overflow: 'hidden', flexShrink: 0,
               background: `linear-gradient(135deg, ${green}, ${greenDark})`,
-              borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: '#fff', fontWeight: 700, fontSize: '0.82rem'
             }}>
-              {user?.name?.charAt(0).toUpperCase()}
+              {user?.profileImage
+                ? <img src={user.profileImage} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                : user?.name?.charAt(0).toUpperCase()}
             </div>
             <span style={{
               fontWeight: 600, fontSize: '0.85rem',
               color: greenDark, fontFamily: 'DM Sans, sans-serif',
               letterSpacing: '0.01em'
             }}>
-              {user?.name?.split(' ')[0]}
+              {user?.name?.split(' ')[0]} ▾
             </span>
-          </div>
+          </button>
+
+          {/* Dropdown */}
+          {profileDropdownOpen && (
+            <>
+              <div
+                onClick={() => setProfileDropdownOpen(false)}
+                style={{ position: 'fixed', inset: 0, zIndex: 998 }}
+              />
+              <div style={{
+                position: 'absolute', top: 'calc(100% + 8px)', right: 0,
+                background: cardBg, border: `1px solid ${border}`,
+                borderRadius: '12px', boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
+                minWidth: '230px', overflow: 'hidden', zIndex: 999,
+                backdropFilter: 'blur(20px)'
+              }}>
+                <div style={{
+                  padding: '16px 18px', borderBottom: `1px solid ${border}`,
+                  display: 'flex', alignItems: 'center', gap: '12px'
+                }}>
+                  <div style={{
+                    width: '40px', height: '40px', borderRadius: '50%',
+                    overflow: 'hidden', flexShrink: 0,
+                    background: `linear-gradient(135deg, ${green}, ${greenDark})`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: '#fff', fontWeight: 700, fontSize: '1rem'
+                  }}>
+                    {user?.profileImage
+                      ? <img src={user.profileImage} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      : user?.name?.charAt(0).toUpperCase()}
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: textColor, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {user?.name}
+                    </div>
+                    <div style={{ color: mutedColor, fontSize: '0.76rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {user?.email}
+                    </div>
+                    <span style={{
+                      display: 'inline-block', marginTop: '4px',
+                      background: greenDim, color: greenDark,
+                      border: `1px solid ${greenBorder}`,
+                      fontSize: '0.62rem', fontWeight: 700,
+                      padding: '1px 8px', borderRadius: '50px',
+                      letterSpacing: '0.06em', textTransform: 'uppercase'
+                    }}>
+                      {user?.role}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => { navigate('/profile'); setProfileDropdownOpen(false); }}
+                  style={{
+                    display: 'block', width: '100%', textAlign: 'left',
+                    padding: '11px 18px', background: 'none', border: 'none',
+                    fontSize: '0.88rem', color: textColor, cursor: 'pointer',
+                    fontFamily: 'DM Sans, sans-serif'
+                  }}>
+                  👤 View Full Profile
+                </button>
+                <button
+                  onClick={() => { navigate(user?.role === 'worker' ? '/worker' : '/dashboard'); setProfileDropdownOpen(false); }}
+                  style={{
+                    display: 'block', width: '100%', textAlign: 'left',
+                    padding: '11px 18px', background: 'none', border: 'none',
+                    fontSize: '0.88rem', color: textColor, cursor: 'pointer',
+                    fontFamily: 'DM Sans, sans-serif'
+                  }}>
+                  📊 My Dashboard
+                </button>
+                <div style={{ height: '1px', background: border }} />
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    display: 'block', width: '100%', textAlign: 'left',
+                    padding: '11px 18px', background: 'none', border: 'none',
+                    fontSize: '0.88rem', color: '#dc2626', cursor: 'pointer',
+                    fontFamily: 'DM Sans, sans-serif'
+                  }}>
+                  🚪 Logout
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </nav>
 
@@ -166,7 +255,6 @@ export default function Layout({ children }) {
           borderBottom: `1px solid ${border}`,
           display: 'flex', justifyContent: 'space-between', alignItems: 'center'
         }}>
-          {/* Logo + name */}
           <div style={{
             display: 'flex', alignItems: 'center', gap: '10px',
             fontFamily: 'Plus Jakarta Sans, sans-serif',
@@ -177,7 +265,6 @@ export default function Layout({ children }) {
             Fixora
           </div>
 
-          {/* Close button */}
           <button
             onClick={() => setSidebarOpen(false)}
             style={{
@@ -190,21 +277,25 @@ export default function Layout({ children }) {
         </div>
 
         {/* User Card */}
-        <div style={{
-          margin: '16px', padding: '16px',
-          background: dark ? 'rgba(47,158,99,0.08)' : 'rgba(47,158,99,0.06)',
-          border: `1px solid ${border}`,
-          borderRadius: '12px'
-        }}>
+        <div
+          onClick={() => { navigate('/profile'); setSidebarOpen(false); }}
+          style={{
+            margin: '16px', padding: '16px',
+            background: dark ? 'rgba(47,158,99,0.08)' : 'rgba(47,158,99,0.06)',
+            border: `1px solid ${border}`,
+            borderRadius: '12px', cursor: 'pointer'
+          }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{
-              width: '42px', height: '42px',
+              width: '42px', height: '42px', borderRadius: '50%',
+              overflow: 'hidden', flexShrink: 0,
               background: `linear-gradient(135deg, ${green}, ${greenDark})`,
-              borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: '#fff', fontWeight: 700, fontSize: '1rem'
             }}>
-              {user?.name?.charAt(0).toUpperCase()}
+              {user?.profileImage
+                ? <img src={user.profileImage} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                : user?.name?.charAt(0).toUpperCase()}
             </div>
             <div>
               <div style={{
