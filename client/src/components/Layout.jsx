@@ -17,12 +17,12 @@ export default function Layout({ children }) {
   };
 
   const navItems = [
-    { icon: '📊', label: 'Dashboard', path: user?.role === 'worker' ? '/worker' : '/dashboard' },
-    { icon: '🗺️', label: 'Live Map', path: '/map' },
-    { icon: '📝', label: 'Report Issue', path: '/report' },
-    { icon: '🏰', label: 'Guilds', path: '/guilds' },
-    { icon: '👤', label: 'My Profile', path: '/profile' },
-    { icon: '📧', label: 'Contact', path: '/contact' },
+    { label: 'Dashboard', path: user?.role === 'worker' ? '/worker' : '/dashboard' },
+    { label: 'Live Map', path: '/map' },
+    { label: 'Report Issue', path: '/report' },
+    { label: 'Guilds', path: '/guilds' },
+    { label: 'My Profile', path: '/profile' },
+    { label: 'Contact', path: '/contact' },
     ...(user?.role === 'admin' ? [{ icon: '⚙️', label: 'Admin Panel', path: '/admin' }] : []),
   ];
 
@@ -192,7 +192,7 @@ export default function Layout({ children }) {
                     fontSize: '0.88rem', color: textColor, cursor: 'pointer',
                     fontFamily: 'DM Sans, sans-serif'
                   }}>
-                  👤 View Full Profile
+                  View Full Profile
                 </button>
                 <button
                   onClick={() => { navigate(user?.role === 'worker' ? '/worker' : '/dashboard'); setProfileDropdownOpen(false); }}
@@ -202,7 +202,7 @@ export default function Layout({ children }) {
                     fontSize: '0.88rem', color: textColor, cursor: 'pointer',
                     fontFamily: 'DM Sans, sans-serif'
                   }}>
-                  📊 My Dashboard
+                  My Dashboard
                 </button>
                 <div style={{ height: '1px', background: border }} />
                 <button
@@ -213,7 +213,7 @@ export default function Layout({ children }) {
                     fontSize: '0.88rem', color: '#dc2626', cursor: 'pointer',
                     fontFamily: 'DM Sans, sans-serif'
                   }}>
-                  🚪 Logout
+                  Logout
                 </button>
               </div>
             </>
